@@ -1,0 +1,24 @@
+{% extends 'products/main.html' %}
+
+{% block content %}
+<td><a class="btn btn-success" href="{% url 'category_create' %}">Add new category</a></td>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in categories %}
+      <tr>
+        <th scope="row"></th>
+        <td>{{ category.name }}</td>
+        <td><a class="btn btn-success" href="{% url 'category_edit' category.id %}">Edit</a></td>
+        <td><a class="btn btn-danger" href="{% url 'category_delete' category.id %}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

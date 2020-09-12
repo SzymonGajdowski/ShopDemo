@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Category, Product
-from .forms import ProductForm
+from .forms import ProductForm, CategoryForm
 
 def home_view(request):
     products = Product.objects.all()
@@ -16,6 +16,16 @@ def about_view(request):
 
 def contact_view(request):
     return render(request, 'products/contact.html')
+
+def categories_view(request):
+    categories = Category.objects.all()
+
+    context = {'categories': categories}
+
+    return render(request, 'products/categories.html', context)
+
+
+# PRODUCT CRUD
 
 def create_product(request):
 
@@ -47,6 +57,42 @@ def delete_product(request, pk):
     product = Product.objects.get(id=pk)
     if request.method == 'POST':
         product.delete()
+        return redirect('/')
+
+    return render(request, 'products/delete_form.html')
+
+# CATEGORY CRUD
+
+def create_category(request):
+
+    form = CategoryForm()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'products/create_form.html', context)
+
+def edit_category(request, pk):
+
+    category = Category.objects.get(id=pk)
+    form = CategoryForm(instance=category)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'products/create_form.html', context)
+
+def delete_category(request, pk):
+
+    category = Category.objects.get(id=pk)
+    if request.method == 'POST':
+        category.delete()
         return redirect('/')
 
     return render(request, 'products/delete_form.html')
