@@ -2,12 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Category, Product
 from .forms import ProductForm, CategoryForm
+from .filters import ProductFilter
 
 def home_view(request):
     products = Product.objects.all()
     categories = Category.objects.all()
 
-    context = {'products': products, 'categories': categories}
+    myFilter = ProductFilter(request.GET, queryset=products)
+    products = myFilter.qs
+
+    context = {'products': products, 'categories': categories, 'myFilter': myFilter}
 
     return render(request, 'products/home.html', context)
 
