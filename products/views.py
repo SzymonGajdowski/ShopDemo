@@ -3,17 +3,23 @@ from django.http import HttpResponse
 from .models import Category, Product
 from .forms import ProductForm, CategoryForm
 from .filters import ProductFilter
+from django.views.generic import DetailView
 
 def home_view(request):
     products = Product.objects.all()
     categories = Category.objects.all()
 
-    myFilter = ProductFilter(request.GET, queryset=products)
-    products = myFilter.qs
-
-    context = {'products': products, 'categories': categories, 'myFilter': myFilter}
+    context = {'products': products, 'categories': categories,}
 
     return render(request, 'products/home.html', context)
+
+def card_view(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+
+    context = {'products': products, 'categories': categories,}
+
+    return render(request, 'products/card_view.html', context)
 
 def about_view(request):
     return render(request, 'products/about.html')
@@ -27,6 +33,10 @@ def categories_view(request):
     context = {'categories': categories}
 
     return render(request, 'products/categories.html', context)
+
+class ProductDetailView(DetailView):
+
+    model = Product
 
 
 # PRODUCT CRUD

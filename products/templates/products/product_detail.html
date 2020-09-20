@@ -1,0 +1,9 @@
+{% extends 'products/main.html' %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <p>Description: {{ object.description }}</p>
+    <p>Category: {{ object.product_category }}</p>
+    <p>Price: {{ object.price }}</p>
+
+{% endblock %}

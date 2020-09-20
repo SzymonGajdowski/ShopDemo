@@ -1,12 +1,16 @@
 {% extends 'products/main.html' %}
 
 {% block content %}
-<td><a class="btn btn-success" href="{% url 'category_create' %}">Add new category</a></td>
+<div class='category-btn'>
+  <td><a class="btn btn-success" href="{% url 'category_create' %}">Add new category</a></td>
+</div>
 <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col"></th>
         <th scope="col">Name</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
