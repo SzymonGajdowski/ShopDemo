@@ -2,18 +2,27 @@
 {% load static %}
 
 {% block content %}
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <a class="btn btn-secondary active" href="{% url 'product_home' %}">
+    <input type="radio" > List View
+  </a>
+  <a class="btn btn-secondary" href="{% url 'card_view' %}">
+    <input type="radio" checked> Card View
+  </a>
+</div>
 	<div class="row">
 	{% for product in products %}
-		<div class="col-lg-4">
-			<img class="thumbnail" src="{{ product.image.url }}">
-			<div class="box-element product">
+		<div class="col-4">
+		<div class="card">
+			<img class="card-img-top" src="{{ product.image.url }}">
+			<div class="card-body">
 				<h6><strong>{{ product.name }}</strong></h6>
 				<hr>
-
 				<a class="btn btn-outline-success" href="{% url 'product_detail' product.id %}">View</a>
 				<h4 style="display: inline-block; float: right"><strong>${{ product.price }}</strong></h4>
-
 			</div>
+		</div>
 		</div>
 	{% endfor %}
 	</div>

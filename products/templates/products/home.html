@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <a class="btn btn-secondary active" href="{% url 'product_home' %}">
+    <input type="radio" checked> List View
+  </a>
+  <a class="btn btn-secondary" href="{% url 'card_view' %}">
+    <input type="radio"> Card View
+  </a>
+</div>
 <table class="table table-striped">
     <thead>
       <tr>

@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import Category, Product
 from .forms import ProductForm, CategoryForm
-from .filters import ProductFilter
 from django.views.generic import DetailView
 
 def home_view(request):
@@ -45,7 +43,7 @@ def create_product(request):
 
     form = ProductForm()
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -58,7 +56,7 @@ def edit_product(request, pk):
     product = Product.objects.get(id=pk)
     form = ProductForm(instance=product)
     if request.method == 'POST':
-        form = ProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             return redirect('/')
