@@ -4,6 +4,8 @@ from products.views import ProductDetailView
 
 urlpatterns = [
     path('', views.home_view, name='product_home'),
+    path('login/', views.login_page, name='login'),
+    path('register/', views.register_page, name='register'),
     path('card_view/', views.card_view, name='card_view'),
     path('about/', views.about_view, name='product_about'),
     path('contact/', views.contact_view, name='product_contact'),

@@ -17,7 +17,8 @@
 		<div class="card">
 			<img class="card-img-top" src="{{ product.image.url }}">
 			<div class="card-body">
-				<h6><strong>{{ product.name }}</strong></h6>
+				<h5><strong>{{ product.name }}</strong></h5>
+				<h6><strong>{{ product.product_category }}</strong></h6>
 				<hr>
 				<a class="btn btn-outline-success" href="{% url 'product_detail' product.id %}">View</a>
 				<h4 style="display: inline-block; float: right"><strong>${{ product.price }}</strong></h4>

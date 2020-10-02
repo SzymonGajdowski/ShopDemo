@@ -3,6 +3,8 @@ from .models import Category, Product
 from .forms import ProductForm, CategoryForm
 from django.views.generic import DetailView
 
+REDIRECT_URL = '/'
+
 def home_view(request):
     products = Product.objects.all()
     categories = Category.objects.all()
@@ -46,7 +48,7 @@ def create_product(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect(REDIRECT_URL)
 
     context = {'form': form}
     return render(request, 'products/create_form.html', context)
@@ -59,7 +61,7 @@ def edit_product(request, pk):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect(REDIRECT_URL)
 
     context = {'form': form}
     return render(request, 'products/create_form.html', context)
@@ -69,7 +71,7 @@ def delete_product(request, pk):
     product = Product.objects.get(id=pk)
     if request.method == 'POST':
         product.delete()
-        return redirect('/')
+        return redirect(REDIRECT_URL)
 
     return render(request, 'products/delete_form.html')
 
@@ -82,7 +84,7 @@ def create_category(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect(REDIRECT_URL)
 
     context = {'form': form}
     return render(request, 'products/create_form.html', context)
@@ -95,7 +97,7 @@ def edit_category(request, pk):
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect(REDIRECT_URL)
 
     context = {'form': form}
     return render(request, 'products/create_form.html', context)
@@ -105,6 +107,18 @@ def delete_category(request, pk):
     category = Category.objects.get(id=pk)
     if request.method == 'POST':
         category.delete()
-        return redirect('/')
+        return redirect(REDIRECT_URL)
 
     return render(request, 'products/delete_form.html')
+
+# User Registration and Login
+
+def register_page(request):
+
+    context = {}
+    return render(request, 'products/register.html', context)
+
+def login_page(request):
+
+    context = {}
+    return render(request, 'products/login.html', context)
