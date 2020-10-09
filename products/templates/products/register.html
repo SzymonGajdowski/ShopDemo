@@ -1,1 +1,13 @@
-<h1>Register</h1>
+{% extends 'products/main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class='forms'>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" name="Create User">
+    </form>
+
+{% endblock %}

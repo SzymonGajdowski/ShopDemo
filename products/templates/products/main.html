@@ -17,6 +17,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
         <a class="navbar-brand" href="{% url 'product_home' %}">Shop with some products</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -36,6 +37,15 @@
               <a class="nav-link" href="{% url 'categories_home' %}">Manage Categories</a>
             </li>
           </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+          </ul>
+        </div>
         </div>
       </nav>
 

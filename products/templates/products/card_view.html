@@ -3,14 +3,29 @@
 
 {% block content %}
 
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <a class="btn btn-secondary active" href="{% url 'product_home' %}">
-    <input type="radio" > List View
-  </a>
-  <a class="btn btn-secondary" href="{% url 'card_view' %}">
-    <input type="radio" checked> Card View
-  </a>
+<!-- Search form and "list view/card view buttons -->
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <a class="btn btn-secondary" href="{% url 'product_home' %}">
+        <input type="radio"> List View
+      </a>
+      <a class="btn btn-secondary" href="{% url 'card_view' %}">
+        <input type="radio" checked> Card View
+      </a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <form action="{% url 'card_view' %}" method="get">
+      <input name="search" type="text" placeholder="Name...">
+      <button>Search</button>
+    </form>
+  </div>
 </div>
+
+<!-- Card view -->
+
 	<div class="row">
 	{% for product in products %}
 		<div class="col-4">

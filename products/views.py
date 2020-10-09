@@ -1,23 +1,31 @@
 from django.shortcuts import render, redirect
 from .models import Category, Product
-from .forms import ProductForm, CategoryForm
+from .forms import ProductForm, CategoryForm, CreateUserForm
 from django.views.generic import DetailView
+from django.contrib import messages
+
 
 REDIRECT_URL = '/'
 
 def home_view(request):
     products = Product.objects.all()
     categories = Category.objects.all()
-
-    context = {'products': products, 'categories': categories,}
+    search = request.GET.get('search')
+    if search:
+        q1 = Product.objects.filter(name__contains=search)
+        products = q1
+    context = {'products': products, 'categories': categories}
 
     return render(request, 'products/home.html', context)
 
 def card_view(request):
     products = Product.objects.all()
     categories = Category.objects.all()
-
-    context = {'products': products, 'categories': categories,}
+    search = request.GET.get('search')
+    if search:
+        q1 = Product.objects.filter(name__contains=search)
+        products = q1
+    context = {'products': products, 'categories': categories}
 
     return render(request, 'products/card_view.html', context)
 
@@ -115,7 +123,14 @@ def delete_category(request, pk):
 
 def register_page(request):
 
-    context = {}
+    form = CreateUserForm
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account was created')
+            return redirect('login')
+    context = {'form': form}
     return render(request, 'products/register.html', context)
 
 def login_page(request):
