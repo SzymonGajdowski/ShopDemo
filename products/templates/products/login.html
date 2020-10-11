@@ -3,6 +3,14 @@
 
 {% block content %}
 
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{message}}
+        </div>
+    {% endfor %}
+    
+    <br>
+
     <div class='forms'>
     <form method="POST">
         {% csrf_token %}
@@ -10,10 +18,5 @@
         <input type="submit" name="Login">
     </form>
 
-    {% for message in messages %}
-        <div class="alert alert-success" role="alert">
-            {{message}}
-        </div>
-    {% endfor %}
 
 {% endblock %}

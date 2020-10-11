@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Category, Product
 from .forms import ProductForm, CategoryForm, CreateUserForm
 from django.views.generic import DetailView
+
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 REDIRECT_URL = '/'
@@ -48,7 +51,7 @@ class ProductDetailView(DetailView):
 
 
 # PRODUCT CRUD
-
+@login_required
 def create_product(request):
 
     form = ProductForm()
@@ -84,7 +87,7 @@ def delete_product(request, pk):
     return render(request, 'products/delete_form.html')
 
 # CATEGORY CRUD
-
+@login_required
 def create_category(request):
 
     form = CategoryForm()
@@ -132,8 +135,3 @@ def register_page(request):
             return redirect('login')
     context = {'form': form}
     return render(request, 'products/register.html', context)
-
-def login_page(request):
-
-    context = {}
-    return render(request, 'products/login.html', context)
